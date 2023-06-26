@@ -1,1 +1,34 @@
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+server:
+  port: 8080
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  cache:
+    type: redis
+    redis:
+      use-key-prefix: false
+      key-prefix: code_
+      cache-null-values: false
+      time-to-live: 5m
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/hospital?useSSL=false&characterEncoding=utf-8
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: cwb
+  mail:
+    username: 2961777212@qq.com
+    password: pxkhkbxcfmxydcgj
+    host: smtp.qq.com
+
 

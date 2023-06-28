@@ -22,7 +22,7 @@ public class Result<R> implements Serializable {
 
     public static <T> Result<T> success(T object){
         Result<T> r=new Result();
-        r.data=object;
+        r.data = object;
         r.code = CODE.SUCCESS;
         return r;
     }
@@ -32,7 +32,7 @@ public class Result<R> implements Serializable {
         r.msg=msg;
         return r;
     }
-    public  Result<R> add(String key,String value){
+    public Result<R> add(String key,String value){
         this.map.put(key,value);
         return this;
     }

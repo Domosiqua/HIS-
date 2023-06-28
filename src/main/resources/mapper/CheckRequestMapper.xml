@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CheckRequestMapper">
+
+    <resultMap id="BaseResultMap" type="com.domain.CheckRequest">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="registerId" column="register_id" jdbcType="INTEGER"/>
+            <result property="medicalTechnologyId" column="medical_technology_id" jdbcType="INTEGER"/>
+            <result property="checkInfo" column="check_info" jdbcType="VARCHAR"/>
+            <result property="checkPosition" column="check_position" jdbcType="VARCHAR"/>
+            <result property="creationTime" column="creation_time" jdbcType="TIMESTAMP"/>
+            <result property="checkEmployeeId" column="check_employee_id" jdbcType="INTEGER"/>
+            <result property="inputcheckEmployeeId" column="inputcheck_employee_id" jdbcType="INTEGER"/>
+            <result property="checkTime" column="check_time" jdbcType="TIMESTAMP"/>
+            <result property="checkResult" column="check_result" jdbcType="VARCHAR"/>
+            <result property="checkState" column="check_state" jdbcType="VARCHAR"/>
+            <result property="checkRemark" column="check_remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,register_id,medical_technology_id,
+        check_info,check_position,creation_time,
+        check_employee_id,inputcheck_employee_id,check_time,
+        check_result,check_state,check_remark
+    </sql>
+</mapper>

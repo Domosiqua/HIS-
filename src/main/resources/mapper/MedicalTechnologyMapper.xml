@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.MedicalTechnologyMapper">
+
+    <resultMap id="BaseResultMap" type="com.domain.MedicalTechnology">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="techCode" column="tech_code" jdbcType="VARCHAR"/>
+            <result property="techName" column="tech_name" jdbcType="VARCHAR"/>
+            <result property="techFormat" column="tech_format" jdbcType="VARCHAR"/>
+            <result property="techPrice" column="tech_price" jdbcType="DECIMAL"/>
+            <result property="techType" column="tech_type" jdbcType="VARCHAR"/>
+            <result property="priceType" column="price_type" jdbcType="VARCHAR"/>
+            <result property="deptmentId" column="deptment_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,tech_code,tech_name,
+        tech_format,tech_price,tech_type,
+        price_type,deptment_id
+    </sql>
+</mapper>

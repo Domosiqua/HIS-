@@ -70,12 +70,10 @@ public class LoginCheckFilter implements Filter {
             filterChain.doFilter(request,response);
             return;
         }
-
         log.info("用户未登陆");
         response.getWriter().write(JSON.toJSONString(Result.error("NOTLOGIN")));
         return;
     }
-
     /**
      * 路径匹配 本次请求是否放行
      * @param requestURI

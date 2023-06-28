@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.SettleCategoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.domain.SettleCategory">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="settleCode" column="settle_code" jdbcType="VARCHAR"/>
+            <result property="settleName" column="settle_name" jdbcType="VARCHAR"/>
+            <result property="sequenceNo" column="sequence_no" jdbcType="INTEGER"/>
+            <result property="delmark" column="delmark" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,settle_code,settle_name,
+        sequence_no,delmark
+    </sql>
+</mapper>

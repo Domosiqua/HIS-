@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.RegisterMapper">
+
+    <resultMap id="BaseResultMap" type="com.domain.Register">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="caseNumber" column="case_number" jdbcType="VARCHAR"/>
+            <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+            <result property="gender" column="gender" jdbcType="VARCHAR"/>
+            <result property="cardNumber" column="card_number" jdbcType="VARCHAR"/>
+            <result property="birthday" column="birthday" jdbcType="DATE"/>
+            <result property="age" column="age" jdbcType="INTEGER"/>
+            <result property="ageType" column="age_type" jdbcType="VARCHAR"/>
+            <result property="homeAddress" column="home_address" jdbcType="VARCHAR"/>
+            <result property="visitDate" column="visit_date" jdbcType="TIMESTAMP"/>
+            <result property="noon" column="noon" jdbcType="VARCHAR"/>
+            <result property="deptmentId" column="deptment_id" jdbcType="INTEGER"/>
+            <result property="employeeId" column="employee_id" jdbcType="INTEGER"/>
+            <result property="registLevelId" column="regist_level_id" jdbcType="INTEGER"/>
+            <result property="settleCategoryId" column="settle_category_id" jdbcType="INTEGER"/>
+            <result property="isBook" column="is_book" jdbcType="CHAR"/>
+            <result property="registMethod" column="regist_method" jdbcType="VARCHAR"/>
+            <result property="visitState" column="visit_state" jdbcType="INTEGER"/>
+            <result property="registMoney" column="regist_money" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,case_number,real_name,
+        gender,card_number,birthday,
+        age,age_type,home_address,
+        visit_date,noon,deptment_id,
+        employee_id,regist_level_id,settle_category_id,
+        is_book,regist_method,visit_state,
+        regist_money
+    </sql>
+</mapper>

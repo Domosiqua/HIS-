@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.MedicalRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.domain.MedicalRecord">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="registerId" column="register_id" jdbcType="INTEGER"/>
+            <result property="readme" column="readme" jdbcType="VARCHAR"/>
+            <result property="present" column="present" jdbcType="VARCHAR"/>
+            <result property="presentTreat" column="present_treat" jdbcType="VARCHAR"/>
+            <result property="history" column="history" jdbcType="VARCHAR"/>
+            <result property="allergy" column="allergy" jdbcType="VARCHAR"/>
+            <result property="physique" column="physique" jdbcType="VARCHAR"/>
+            <result property="proposal" column="proposal" jdbcType="VARCHAR"/>
+            <result property="careful" column="careful" jdbcType="VARCHAR"/>
+            <result property="diagnosis" column="diagnosis" jdbcType="VARCHAR"/>
+            <result property="cure" column="cure" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,register_id,readme,
+        present,present_treat,history,
+        allergy,physique,proposal,
+        careful,diagnosis,cure
+    </sql>
+</mapper>

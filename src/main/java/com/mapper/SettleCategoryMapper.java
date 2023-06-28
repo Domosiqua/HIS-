@@ -1,0 +1,20 @@
+package com.mapper;
+
+import com.domain.SettleCategory;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+* @author admin
+* @description 针对表【settle_category】的数据库操作Mapper
+* @createDate 2023-06-26 21:40:49
+* @Entity com.domain.SettleCategory
+*/
+@Mapper
+public interface SettleCategoryMapper extends BaseMapper<SettleCategory> {
+
+}
+
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PrescriptionMapper">
+
+    <resultMap id="BaseResultMap" type="com.domain.Prescription">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="registerId" column="register_id" jdbcType="INTEGER"/>
+            <result property="drugId" column="drug_id" jdbcType="INTEGER"/>
+            <result property="drugUsage" column="drug_usage" jdbcType="VARCHAR"/>
+            <result property="drugNumber" column="drug_number" jdbcType="INTEGER"/>
+            <result property="creationTime" column="creation_time" jdbcType="TIMESTAMP"/>
+            <result property="drugState" column="drug_state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,register_id,drug_id,
+        drug_usage,drug_number,creation_time,
+        drug_state
+    </sql>
+</mapper>

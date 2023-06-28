@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.DisposalRequestMapper">
+
+    <resultMap id="BaseResultMap" type="com.domain.DisposalRequest">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="registerId" column="register_id" jdbcType="INTEGER"/>
+            <result property="medicalTechnologyId" column="medical_technology_id" jdbcType="INTEGER"/>
+            <result property="disposalInfo" column="disposal_info" jdbcType="VARCHAR"/>
+            <result property="disposalPosition" column="disposal_position" jdbcType="VARCHAR"/>
+            <result property="creationTime" column="creation_time" jdbcType="TIMESTAMP"/>
+            <result property="disposalEmployeeId" column="disposal_employee_id" jdbcType="INTEGER"/>
+            <result property="inputdisposalEmployeeId" column="inputdisposal_employee_id" jdbcType="INTEGER"/>
+            <result property="disposalTime" column="disposal_time" jdbcType="TIMESTAMP"/>
+            <result property="disposalResult" column="disposal_result" jdbcType="VARCHAR"/>
+            <result property="disposalState" column="disposal_state" jdbcType="VARCHAR"/>
+            <result property="disposalRemark" column="disposal_remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,register_id,medical_technology_id,
+        disposal_info,disposal_position,creation_time,
+        disposal_employee_id,inputdisposal_employee_id,disposal_time,
+        disposal_result,disposal_state,disposal_remark
+    </sql>
+</mapper>

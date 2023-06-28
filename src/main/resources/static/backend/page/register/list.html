@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>HIS-Register</title>
   <!-- 引入样式 -->
   <link rel="stylesheet" href="../../plugins/element-ui/index.css" />
   <link rel="stylesheet" href="../../styles/common.css" />
@@ -22,7 +22,7 @@
       <div class="tableBar">
         <el-input
           v-model="input"
-          placeholder="请输入员工姓名"
+          placeholder="挂号科室"
           style="width: 250px"
           clearable
            @keyup.enter.native="handleQuery"
@@ -38,7 +38,7 @@
           type="primary"
           @click="addMemberHandle('add')"
         >
-          + 添加员工
+          + 挂号
         </el-button>
       </div>
       <el-table
@@ -156,13 +156,13 @@
             if (st === 'add'){
               window.parent.menuHandle({
                 id: '2',
-                url: '/backend/page/member/add.html',
+                url: '/backend/page/register/add.html',
                 name: '添加员工'
               },true)
             } else {
               window.parent.menuHandle({
                 id: '2',
-                url: '/backend/page/member/add.html?id='+st,
+                url: '/backend/page/register/add.html?id='+st,
                 name: '修改员工'
               },true)
             }

@@ -1,9 +1,6 @@
 package com.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.Result;
 import com.domain.Employee;
 import com.service.EmployeeService;
@@ -40,7 +37,7 @@ public class EmployeeController {
         Employee employee = service.isexistByUsername(emp.getRealname());
 //        String password = DigestUtils.md5DigestAsHex(emp.getPassword().getBytes());
         String password =emp.getPassword();
-
+        System.out.println(emp);
         if (service.isexistByUsername(emp.getRealname())==null)
             return Result.error("该用户不存在");
 

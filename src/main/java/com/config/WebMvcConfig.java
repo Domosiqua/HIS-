@@ -4,6 +4,7 @@ import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -41,6 +42,15 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:5500") // 设置允许访问的源地址
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // 允许请求的方法
+                .allowedHeaders("*") // 允许的请求头
+                .allowCredentials(true) // 是否支持用户凭证信息
+                .maxAge(3600); // 预检请求的有效期，单位为秒
     }
 
     @Bean

@@ -46,7 +46,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5500") // 设置允许访问的源地址
+                .allowedOrigins("http://127.0.0.1:5500") // 设置允许访问的源地址
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // 允许请求的方法
                 .allowedHeaders("*") // 允许的请求头
                 .allowCredentials(true) // 是否支持用户凭证信息

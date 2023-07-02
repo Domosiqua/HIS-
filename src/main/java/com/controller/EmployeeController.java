@@ -1,16 +1,31 @@
 package com.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.Result;
+import com.domain.Department;
 import com.domain.Employee;
+import com.domain.RegistLevel;
+import com.domain.Register;
+import com.domain.dto.EmployeeDTO;
+import com.service.DepartmentService;
 import com.service.EmployeeService;
+import com.service.RegistLevelService;
+import com.service.RegisterService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author CWB
@@ -22,7 +37,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
-    private EmployeeService service;
+    private EmployeeService employeeService;
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private RegistLevelService registerLevelService;
 
     /**
      * 员工登录
@@ -34,11 +53,11 @@ public class EmployeeController {
     @PostMapping("/login")
     public Result<Employee> login(HttpServletRequest request, @RequestBody Employee emp){
 
-        Employee employee = service.isexistByUsername(emp.getRealname());
+        Employee employee = employeeService.isexistByUsername(emp.getRealname());
 //        String password = DigestUtils.md5DigestAsHex(emp.getPassword().getBytes());
         String password =emp.getPassword();
         System.out.println(emp);
-        if (service.isexistByUsername(emp.getRealname())==null)
+        if (employeeService.isexistByUsername(emp.getRealname())==null)
             return Result.error("该用户不存在");
 
         if (!(employee.getPassword().equals(password)))
@@ -63,39 +82,53 @@ public class EmployeeController {
         return Result.success("退出成功");
     }
 
-//    /**
-//     * 员工列表
-//     * @param page
-//     * @param pageSize
-//     * @return
-//     */
-//    @GetMapping("/page")
-//    public Result<IPage<Employee>> page(@RequestParam("page") int page,@RequestParam("pageSize") int pageSize,String name){
-//        IPage page1=new Page(page,pageSize);
-//        LambdaQueryWrapper<Employee> queryWrapper =new LambdaQueryWrapper();
-//        queryWrapper.like(StringUtils.isNotEmpty(name),Employee::getName,name);
-//        queryWrapper.orderByDesc(Employee::getUpdateTime);
-//        service.page(page1, queryWrapper);
-//        return Result.success(page1);
-//    }
-//
-//    /**
-//     * 添加员工
-//     * @param employee
-//     * @return
-//     */
-//    @PostMapping
-//    public Result<Boolean> insert(HttpServletRequest request,@RequestBody Employee employee){
-//        employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
-//
-//        boolean save = service.save(employee);
-//
-//        if (save)
-//            return Result.success(save);
-//        else
-//            return Result.error("数据异常");
-//    }
-//
+    /**
+     * 员工列表
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/page")
+    public Result<IPage<EmployeeDTO>> page(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, String name){
+        IPage page1=new Page(page,pageSize);
+        LambdaQueryWrapper<Employee> queryWrapper =new LambdaQueryWrapper();
+        queryWrapper.like(StringUtils.isNotEmpty(name),Employee::getRealname,name);
+        employeeService.page(page1, queryWrapper);
+        List<Employee> records1 = page1.getRecords();
+        List<EmployeeDTO> records = new ArrayList<>();
+
+        for(Employee employee : records1) {
+            EmployeeDTO dto = new EmployeeDTO();
+            BeanUtils.copyProperties(employee, dto);
+            Department byId = departmentService.getById(employee.getDeptmentId());
+            if(byId!=null)
+            dto.setDeptName(byId.getDeptName());
+            RegistLevel byId1 = registerLevelService.getById(employee.getRegistLevelId());
+            if(byId1!=null)
+            dto.setRegistName(byId1.getRegistName());
+            records.add(dto);
+        }
+        page1.setRecords(records);
+        return Result.success(page1);
+    }
+
+    /**
+     * 添加员工
+     * @param employee
+     * @return
+     */
+    @PostMapping
+    public Result<Boolean> insert(HttpServletRequest request,@RequestBody Employee employee){
+        employee.setPassword("123456");
+        employee.setDelmark(1);
+        System.out.println(employee);
+        boolean save = employeeService.save(employee);
+        if (save)
+            return Result.success(save);
+        else
+            return Result.error("数据异常");
+    }
+
 //    /**
 //     * 编辑与修改状态
 //     * @param request
@@ -113,20 +146,42 @@ public class EmployeeController {
 //        }
 //
 //    }
-//
-//    /**
-//     * 根据id查找员工
-//     * @param id
-//     * @return
-//     */
-//    @GetMapping("/{id}")
-//    public Result<Employee> Changeall(@PathVariable Long id)
-//    {
-//
-//        Employee emp = service.getById(id);
-//        if(emp==null){
-//            return  Result.error("未知错误");
-//        }
-//        return  Result.success(emp);
-//    }
+
+    /**
+     * 根据id查找员工
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<EmployeeDTO> selectByid(@PathVariable Long id)
+    {
+
+        Employee emp = employeeService.getById(id);
+        EmployeeDTO tmp=new EmployeeDTO();
+        BeanUtils.copyProperties(emp, tmp);
+        if(emp==null){
+            return  Result.error("未知错误");
+        }
+        List<Department> list = departmentService.list();
+        tmp.setDepartmentlist(list);
+        List<RegistLevel> list1 = registerLevelService.list();
+        tmp.setRegistlevellist(list1);
+        Department byId = departmentService.getById(tmp.getDeptmentId());
+        tmp.setDeptName(byId.getDeptName());
+        RegistLevel byId1 = registerLevelService.getById(tmp.getRegistLevelId());
+        tmp.setRegistName(byId1.getRegistName());
+        return  Result.success(tmp);
+    }
+    @GetMapping()
+    public Result<EmployeeDTO> getdetail()
+    {
+
+
+        EmployeeDTO tmp=new EmployeeDTO();
+        List<Department> list = departmentService.list();
+        tmp.setDepartmentlist(list);
+        List<RegistLevel> list1 = registerLevelService.list();
+        tmp.setRegistlevellist(list1);
+        return  Result.success(tmp);
+    }
 }

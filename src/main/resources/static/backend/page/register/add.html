@@ -41,6 +41,11 @@
             <el-option v-for="(item, index) in ruleForm.registlevellist" :key="index" :label="item.registName" :value="item.id" />
           </el-select>
         </el-form-item>
+        <el-form-item label="排班时间:"> <!--prop="idType">-->
+          <el-select v-model="ruleForm.schedulingId" placeholder="请选择排班时间" @change="$forceUpdate()">
+            <el-option v-for="(item, index) in ruleForm.schedulinglist" :key="index" :label="item.ruleName" :value="item.id" />
+          </el-select>
+        </el-form-item>
 
         <div class="subBox address">
           <el-form-item>
@@ -86,11 +91,14 @@
             ruleForm : {
                 'registlevellist':[],
                 'departmentlist':[],
-                'realname': '',
+                'realName': '',
                 'deptName':'',
                 'registName':'',
+                'ruleName':'',
                 'deptmentId':'',
                 'registLevelId':'',
+                'schedulingId':'',
+                'schedulinglist':'',
 
 
             }

@@ -62,7 +62,12 @@
           <template slot-scope="scope">
             {{ String(scope.row.delmark) === '0' ? '已禁用' : '正常' }}
           </template>
+
         </el-table-column>
+        <el-table-column
+                prop="ruleName"
+                label="排班时间"
+        ></el-table-column>
         <el-table-column
           label="操作"
           width="160"
@@ -83,9 +88,9 @@
               size="small"
               class="delBut non"
               @click="statusHandle(scope.row)"
-              v-if="user === 'admin'"
+
             >
-              {{ scope.row.status == '1' ? '禁用' : '启用' }}
+              {{ scope.row.delmark == '1' ? '禁用' : '启用' }}
             </el-button>
           </template>
         </el-table-column>
@@ -121,7 +126,7 @@
              pageSize: 10,
              tableData : [],
              id : '',
-             status : '',
+             delmark : '',
           }
         },
         computed: {},
@@ -169,6 +174,7 @@
           },
           //状态修改
           statusHandle (row) {
+
             this.id = row.id
             this.status = row.status
             this.$confirm('确认调整该账号的状态?', '提示', {
@@ -176,7 +182,7 @@
               'cancelButtonText': '取消',
               'type': 'warning'
               }).then(() => {
-              enableOrDisableEmployee({ 'id': this.id, 'status': !this.status ? 1 : 0 }).then(res => {
+              enableOrDisableEmployee({ 'id': this.id, 'delmark': row.delmark===0 ? 1 : 0 }).then(res => {
                 console.log('enableOrDisableEmployee',res)
                 if (String(res.code) === '1') {
                   this.$message.success('账号状态更改成功！')

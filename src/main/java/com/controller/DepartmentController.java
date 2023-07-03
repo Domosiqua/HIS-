@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.Result;
 import com.domain.Department;
-import com.domain.Employee;
-import com.domain.dto.EmployeeDTO;
 import com.service.DepartmentService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

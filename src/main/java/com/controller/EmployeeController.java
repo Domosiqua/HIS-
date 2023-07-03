@@ -5,15 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.Result;
-import com.domain.Department;
-import com.domain.Employee;
-import com.domain.RegistLevel;
-import com.domain.Register;
+import com.domain.*;
 import com.domain.dto.EmployeeDTO;
-import com.service.DepartmentService;
-import com.service.EmployeeService;
-import com.service.RegistLevelService;
-import com.service.RegisterService;
+import com.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -42,6 +36,8 @@ public class EmployeeController {
     private DepartmentService departmentService;
     @Autowired
     private RegistLevelService registerLevelService;
+    @Autowired
+    private SchedulingService schedulingService;
 
     /**
      * 员工登录
@@ -61,10 +57,10 @@ public class EmployeeController {
             return Result.error("该用户不存在");
 
         if (!(employee.getPassword().equals(password)))
-            return Result.error("密码错误");
+            return Result.error("账号或密码错误");
 
         if(employee.getDelmark()!=1)
-            return Result.error("该账号已被封禁");
+            return Result.error("该账号已禁用");
 
         request.getSession().setAttribute("employee",employee.getId());
         return Result.success(employee);
@@ -102,10 +98,13 @@ public class EmployeeController {
             BeanUtils.copyProperties(employee, dto);
             Department byId = departmentService.getById(employee.getDeptmentId());
             if(byId!=null)
-            dto.setDeptName(byId.getDeptName());
+                dto.setDeptName(byId.getDeptName());
             RegistLevel byId1 = registerLevelService.getById(employee.getRegistLevelId());
             if(byId1!=null)
-            dto.setRegistName(byId1.getRegistName());
+                dto.setRegistName(byId1.getRegistName());
+            Scheduling byId2 = schedulingService.getById(employee.getSchedulingId());
+            if (byId2!=null)
+                dto.setRuleName(byId2.getRuleName());
             records.add(dto);
         }
         page1.setRecords(records);
@@ -129,23 +128,22 @@ public class EmployeeController {
             return Result.error("数据异常");
     }
 
-//    /**
-//     * 编辑与修改状态
-//     * @param request
-//     * @param emp
-//     * @return
-//     */
-//    @PutMapping
-//    public Result<Boolean> ChangeStatus(@RequestBody Employee emp){
-//        boolean b = service.updateById(emp);
-//
-//        if(b)
-//            return Result.success(b);
-//        else{
-//            return Result.error("数据异常");
-//        }
-//
-//    }
+    /**
+     * 编辑与修改状态
+     * @param request
+     * @param emp
+     * @return
+     */
+    @PutMapping
+    public Result<Boolean> ChangeStatus(@RequestBody Employee emp){
+        boolean b = employeeService.updateById(emp);
+        if(b)
+            return Result.success(b);
+        else{
+            return Result.error("数据异常");
+        }
+
+    }
 
     /**
      * 根据id查找员工
@@ -166,10 +164,15 @@ public class EmployeeController {
         tmp.setDepartmentlist(list);
         List<RegistLevel> list1 = registerLevelService.list();
         tmp.setRegistlevellist(list1);
+        List<Scheduling> list2 = schedulingService.list();
+        tmp.setSchedulinglist(list2);
         Department byId = departmentService.getById(tmp.getDeptmentId());
         tmp.setDeptName(byId.getDeptName());
         RegistLevel byId1 = registerLevelService.getById(tmp.getRegistLevelId());
         tmp.setRegistName(byId1.getRegistName());
+        Scheduling byId2 = schedulingService.getById(emp.getSchedulingId());
+        tmp.setRuleName(byId2.getRuleName());
+
         return  Result.success(tmp);
     }
     @GetMapping()
@@ -182,6 +185,8 @@ public class EmployeeController {
         tmp.setDepartmentlist(list);
         List<RegistLevel> list1 = registerLevelService.list();
         tmp.setRegistlevellist(list1);
+        List<Scheduling> list2 = schedulingService.list();
+        tmp.setSchedulinglist(list2);
         return  Result.success(tmp);
     }
 }

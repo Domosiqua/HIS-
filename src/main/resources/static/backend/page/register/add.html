@@ -32,12 +32,12 @@
         </el-form-item>
 
         <el-form-item label="所属科室:"> <!--prop="idType">-->
-          <el-select v-model="ruleForm.deptName" placeholder="请选择所属科室" @change="$forceUpdate()">
+          <el-select v-model="ruleForm.deptmentId" placeholder="请选择所属科室" @change="$forceUpdate()">
             <el-option v-for="(item, index) in ruleForm.departmentlist" :key="index" :label="item.deptName" :value="item.id" />
           </el-select>
         </el-form-item>
         <el-form-item label="挂号级别:" ><!--prop="idType"> -->
-          <el-select v-model="ruleForm.registName" placeholder="请选择挂号级别" @change="$forceUpdate()">
+          <el-select v-model="ruleForm.registLevelId" placeholder="请选择挂号级别" @change="$forceUpdate()">
             <el-option v-for="(item, index) in ruleForm.registlevellist" :key="index" :label="item.registName" :value="item.id" />
           </el-select>
         </el-form-item>
@@ -89,6 +89,8 @@
                 'realname': '',
                 'deptName':'',
                 'registName':'',
+                'deptmentId':'',
+                'registLevelId':'',
 
             }
           }

@@ -79,7 +79,7 @@
               <span>{{headTitle}}</span>
             </div>
             <div class="right-menu">
-              <div class="avatar-wrapper">{{ userInfo.name }}</div>
+              <div class="avatar-wrapper">{{ userInfo.realName }}</div>
               <!-- <div class="logout" @click="logout">退出</div> -->
               <img src="images/icons/btn_close@2x.png" class="outLogin" alt="退出" @click="logout" />
             </div>
@@ -118,25 +118,21 @@
             menuActived: '2',
             userInfo: {},
             menuList: [
-              // {
-              //   id: '1',
-              //   name: '门店管理',
-              //   children: [
                   {
                     id: '2',
-                    name: '员工管理',
+                    name: '门诊医生',
                     url: 'page/register/list.html',
                     icon: 'icon-member'
                   },
                   {
                     id: '3',
-                    name: '分类管理',
+                    name: '挂号',
                     url: 'page/category/list.html',
                     icon: 'icon-category'
                   },
                   {
                     id: '4',
-                    name: '菜品管理',
+                    name: '挂号管理',
                     url: 'page/food/list.html',
                     icon: 'icon-food'
                   },
@@ -148,15 +144,14 @@
                   },
                   {
                     id: '6',
-                    name: '订单明细',
+                    name: '挂号明细',
                     url: 'page/order/list.html',
                     icon: 'icon-order'
                   }
-              //   ],
-              // },
+
             ],
             iframeUrl: 'page/register/list.html',
-            headTitle: '员工管理',
+            headTitle: '门诊医生',
             goBackFlag: false,
             loading: true,
             timer: null

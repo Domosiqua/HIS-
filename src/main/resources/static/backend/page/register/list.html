@@ -38,7 +38,7 @@
           type="primary"
           @click="addMemberHandle('add')"
         >
-          + 新增员工
+          + 新增医生
         </el-button>
       </div>
       <el-table
@@ -132,7 +132,7 @@
         computed: {},
         created() {
           this.init()
-          this.user = JSON.parse(localStorage.getItem('userInfo')).username
+          this.user = JSON.parse(localStorage.getItem('userInfo')).realName
         },
         mounted() {
         },

@@ -178,8 +178,6 @@ public class EmployeeController {
     @GetMapping()
     public Result<EmployeeDTO> getdetail()
     {
-
-
         EmployeeDTO tmp=new EmployeeDTO();
         List<Department> list = departmentService.list();
         tmp.setDepartmentlist(list);

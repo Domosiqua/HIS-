@@ -85,10 +85,10 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/page")
-    public Result<IPage<EmployeeDTO>> page(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, String name){
+    public Result<IPage<EmployeeDTO>> page(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, String realName){
         IPage page1=new Page(page,pageSize);
         LambdaQueryWrapper<Employee> queryWrapper =new LambdaQueryWrapper();
-        queryWrapper.like(StringUtils.isNotEmpty(name),Employee::getRealname,name);
+        queryWrapper.like(StringUtils.isNotEmpty(realName),Employee::getRealname,realName);
         employeeService.page(page1, queryWrapper);
         List<Employee> records1 = page1.getRecords();
         List<EmployeeDTO> records = new ArrayList<>();

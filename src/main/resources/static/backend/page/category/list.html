@@ -293,6 +293,10 @@
           },
           //删除
           deleteHandle(id) {
+            this.$confirm('确认删除该科室, 是否继续?', '确定删除', {
+              'confirmButtonText': '确定',
+              'cancelButtonText': '取消',
+            }).then(() => {
               deleCategory(id).then(res => {
                 if (res.code === 1) {
                   this.$message.success('删除成功！')
@@ -302,8 +306,10 @@
                 }
               }).catch(err => {
                 this.$message.error('请求出错了：' + err)
-              });
-            this.init();
+              })
+            })
+
+
           },
           //数据提交
           submitForm(st) {

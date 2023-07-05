@@ -41,7 +41,7 @@ public class DepartmentController {
 
     }
     @GetMapping("/{id}")
-    public Result<Department> getById(@PathVariable Long id){
+    public Result<Department> getById(@PathVariable Integer id){
         Department byId = service.getById(id);
         return Result.success(byId);
     }
@@ -51,7 +51,7 @@ public class DepartmentController {
         if (result)
             return Result.success(result);
         else
-            return Result.error("更新失败");
+            return Result.error("删除失败");
     }
     @PutMapping()
     public Result<Boolean> update(@RequestBody Department department) {

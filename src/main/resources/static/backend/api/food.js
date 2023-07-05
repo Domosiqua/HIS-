@@ -1,34 +1,33 @@
 // 查询列表接口
 const getDishPage = (params) => {
   return $axios({
-    url: '/dish/page',
+    url: '/scheduling/page',
     method: 'get',
     params
   })
 }
 
 // 删除接口
-const deleteDish = (ids) => {
+const deleteDish = (id) => {
   return $axios({
-    url: '/dish',
+    url: '/scheduling/'+id,
     method: 'delete',
-    params: { ids }
   })
 }
 
 // 修改接口
-const editDish = (params) => {
+const edit = (params) => {
   return $axios({
-    url: '/dish',
+    url: '/scheduling',
     method: 'put',
     data: { ...params }
   })
 }
 
 // 新增接口
-const addDish = (params) => {
+const add = (params) => {
   return $axios({
-    url: '/dish',
+    url: '/scheduling',
     method: 'post',
     data: { ...params }
   })
@@ -37,7 +36,7 @@ const addDish = (params) => {
 // 查询详情
 const queryDishById = (id) => {
   return $axios({
-    url: `/dish/${id}`,
+    url: `/scheduling/${id}`,
     method: 'get'
   })
 }

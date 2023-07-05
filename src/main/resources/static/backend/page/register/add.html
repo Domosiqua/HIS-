@@ -125,7 +125,7 @@
           if (this.id) {
             this.init()
           }
-          queryDtl().then(res => {
+          queryDetail().then(res => {
             if (String(res.code) === '1') {
               console.log(res.data)
               this.ruleForm = res.data

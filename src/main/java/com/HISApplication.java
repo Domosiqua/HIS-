@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Slf4j
 @MapperScan("com.mapper")
 @ServletComponentScan
-@EnableTransactionManagement
+//@EnableTransactionManagement
 //@EnableCaching
 //@EnableKnife4j
 public class HISApplication {

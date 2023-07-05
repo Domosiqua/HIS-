@@ -23,6 +23,7 @@ public class EmployeeDTO extends Employee {
     private List<RegistLevel> registlevellist;
     private List<Department> departmentlist;
     private List<Scheduling> schedulinglist;
+    private List<Employee> employeelist;
 
 
 }

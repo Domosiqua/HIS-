@@ -1,7 +1,11 @@
 package com.controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.Result;
 import com.domain.Department;
 import com.domain.Employee;
@@ -21,6 +25,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,6 +61,14 @@ public class RegisterController {
         dto.setEmployeelist(list2);
         return Result.success(dto);
     }
+    @GetMapping("/page")
+    public Result<IPage<Register>> page(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, String realName){
+        IPage page1=new Page(page,pageSize);
+        LambdaQueryWrapper<Register> queryWrapper =new LambdaQueryWrapper();
+        queryWrapper.like(StringUtils.isNotEmpty(realName),Register::getRealName,realName);
+        registerService.page(page1, queryWrapper);
+        return Result.success(page1);
+    }
     @PostMapping
     public Result<Boolean> save(@RequestBody Register register){
         register.setAgeType("年");
@@ -89,6 +102,16 @@ public class RegisterController {
             return Result.success(save);
         else
             return Result.error("添加失败");
+    }
+    @PutMapping()
+    public Result<Boolean> changeState(@RequestBody Register register){
+        Register byId = registerService.getById(register.getId());
+        byId.setVisitState(register.getVisitState());
+        boolean b = registerService.updateById(byId);
+        if(b)
+            return Result.success(b);
+        else
+            return Result.error("修改失败");
     }
 
 }

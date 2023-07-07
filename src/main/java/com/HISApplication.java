@@ -1,5 +1,6 @@
 package com;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -11,9 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Slf4j
 @MapperScan("com.mapper")
 @ServletComponentScan
-//@EnableTransactionManagement
-//@EnableCaching
-//@EnableKnife4j
+@EnableKnife4j
 public class HISApplication {
 
 	public static void main(String[] args) {

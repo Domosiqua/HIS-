@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0
  */
 @SuppressWarnings({"all"})
-@Configuration
+//@Configuration
 public class RedisConfig {//extends CachingConfigurerSupport {
 
 //    @Bean

@@ -95,7 +95,6 @@ public class RegisterController {
             register.setCaseNumber(UUID.randomUUID().toString());
             money+=1;
         }
-
         register.setRegistMoney(new BigDecimal(money));
         boolean save = registerService.save(register);
         if(save)
